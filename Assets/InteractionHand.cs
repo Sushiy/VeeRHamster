@@ -7,6 +7,7 @@ public class InteractionHand : MonoBehaviour
     public Grabbable m_grabActiveObject = null;
     public bool m_bIsGrabbing = false;
     public Joint m_jointThis;
+    public Rigidbody m_rigidDummy;
 
     public Text m_textDebug;
 
@@ -40,7 +41,7 @@ public class InteractionHand : MonoBehaviour
                 m_textDebug.text = "Release";
                 m_bIsGrabbing = false;
                 //m_grabActiveObject.Release(this.transform);
-                m_jointThis.connectedBody = null;
+                m_jointThis.connectedBody = m_rigidDummy;
             }
                 
         }
@@ -50,7 +51,17 @@ public class InteractionHand : MonoBehaviour
     {
         m_textDebug.text = "empty";
         if (m_grabActiveObject != null)
+        {
             m_grabActiveObject = null;
+            if(m_bIsGrabbing == true)
+            {
+                m_textDebug.text = "Release";
+                m_bIsGrabbing = false;
+                //m_grabActiveObject.Release(this.transform);
+                m_jointThis.connectedBody = m_rigidDummy;
+            }
+
+        }
     }
 
     public void TriggerEntered(Collider _coll)
