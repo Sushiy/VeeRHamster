@@ -3,7 +3,7 @@ using System.Collections;
 
 public class InteractionButton : Interactable
 {
-    public bool m_bActive = false;
+    bool m_bActive = false;
     public bool m_bIsBeingPressed = false;
     private Vector3 m_v3Origin = Vector3.zero;
     public Vector3 m_v3PressAxis = Vector3.forward;
@@ -53,5 +53,10 @@ public class InteractionButton : Interactable
             Alpha += Time.deltaTime * m_fSpeed;
         }
         m_bIsBeingPressed = false;
+    }
+
+    public bool GetValue()
+    {
+        return m_bActive;
     }
 }
