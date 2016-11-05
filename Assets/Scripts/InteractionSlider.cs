@@ -28,6 +28,8 @@ public class InteractionSlider : InteractionGrabbable
     {
         float fDist = Vector3.Distance(m_v3Origin, m_rigidThis.position);
         m_fCurrentValue = fDist;
+		ExecuteDecorators(m_fCurrentValue);
+
         m_textDebug.text = fDist.ToString("F2");
     }
 	

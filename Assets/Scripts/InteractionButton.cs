@@ -1,4 +1,4 @@
-﻿using UnityEngine;
+using UnityEngine;
 using System.Collections;
 
 public class InteractionButton : Interactable
@@ -42,8 +42,10 @@ public class InteractionButton : Interactable
             Alpha += Time.deltaTime * m_fSpeed;
         }
         m_bActive = true;
+		ExecuteDecorators(1f);
         yield return new WaitForSeconds(0.1f);
-        m_bActive = false;
+		ExecuteDecorators(0f);
+				m_bActive = false;
         startP = m_v3Target;
         Alpha = 0f;
         while (Alpha < 1f)
