@@ -11,9 +11,9 @@ public class InteractionTrigger : MonoBehaviour
             m_handThis = transform.parent.GetComponent<InteractionHand>();
     }
     
-    public void OnTriggerEnter(Collider _coll)
+    public void OnTriggerStay(Collider _coll)
     {
-        m_handThis.TriggerEntered(_coll);
+        m_handThis.TriggerStay(_coll);
     }
 
     public void OnTriggerExit(Collider _coll)
