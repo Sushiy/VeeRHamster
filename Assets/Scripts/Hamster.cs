@@ -37,10 +37,6 @@ public class Hamster : MonoBehaviour {
 		{
 			ToggleMovementDir();
 		}
-		
-			
-
-
 		this.TargetWaypoint = SelectNext;
 	}
 
