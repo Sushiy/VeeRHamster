@@ -1,16 +1,35 @@
 using UnityEngine;
 using System.Collections;
+using System.Collections.Generic;
+using UniRx;
+
 
 public class HWaypoint : MonoBehaviour {
 
 	public float Drag = 0.0f;
-	public bool Connected = true;
-	public HWaypoint PreviousWaypoint;
-	public HWaypoint NextWaypoint;
+
+	public BoolReactiveProperty p_Connected = new BoolReactiveProperty(true);
+	public bool Connected { get { return p_Connected.Value; } set { p_Connected.Value = value; } }
+
+	public HWaypointReactiveProperty p_PreviousWaypoint = new HWaypointReactiveProperty();
+	public HWaypoint PreviousWaypoint { get { return p_PreviousWaypoint.Value; } set { p_PreviousWaypoint.Value = value; } }
+
+
+	public HWaypointReactiveProperty p_NextWaypoint = new HWaypointReactiveProperty();
+	public HWaypoint NextWaypoint { get { return p_NextWaypoint.Value; } set { p_NextWaypoint.Value = value; } }
+
+	private List<IHWaypointDecorator> DecoratorList = new List<IHWaypointDecorator>();
+	public List<IHWaypointDecorator> Decorators
+	{
+		get
+		{
+			GetComponents(DecoratorList);
+			return DecoratorList;
+		}
+	}
 
 	public void OnDrawGizmos()
 	{
-
 		if(NextWaypoint!=null)
 		{
 			if(Connected)
@@ -27,4 +46,42 @@ public class HWaypoint : MonoBehaviour {
 			}
 		}
 	}
+
+	public void ChangeNextWaypointRipple(HWaypoint old, HWaypoint _new)
+	{
+		if (old != null)
+		{
+			old.PreviousWaypoint = null;
+
+			if (old.NextWaypoint != null)
+				old.NextWaypoint.ChangePrevWaypointRipple(old.NextWaypoint, null);
+
+		}
+
+		if (_new != null)
+		{
+			_new.PreviousWaypoint = this;
+			this.Connected = true;
+
+			_new.ChangeNextWaypointRipple(null, _new.NextWaypoint);
+		}
+		else
+		{
+			this.Connected = false;
+		}
+
+	}
+
+	public void ChangePrevWaypointRipple(HWaypoint old, HWaypoint _new)
+	{
+		if (old != null)
+		{
+			old.NextWaypoint = null;
+			old.Connected = false;
+		}
+
+		if (_new != null)
+			_new.NextWaypoint = this;
+	}
+
 }

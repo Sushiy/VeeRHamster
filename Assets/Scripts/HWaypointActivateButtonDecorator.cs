@@ -7,7 +7,7 @@ public class HWaypointActivateButtonDecorator : MonoBehaviour, IHWaypointDecorat
 
 	public void OnWaypointReached(Hamster hamster)
 	{
-		System.Media.SystemSounds.Asterisk.Play();
+		System.Media.SystemSounds.Beep.Play();
 
 	}
 }
