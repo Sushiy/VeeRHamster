@@ -41,8 +41,9 @@ public class InteractionButton : Interactable
             yield return null;
             Alpha += Time.deltaTime * m_fSpeed;
         }
-
+        m_bActive = true;
         yield return new WaitForSeconds(0.1f);
+        m_bActive = false;
         startP = m_v3Target;
         Alpha = 0f;
         while (Alpha < 1f)
