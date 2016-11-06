@@ -26,4 +26,14 @@ public class InteractionToggleConnectDecorator : MonoBehaviour, IInteractionDeco
         {
         }
     }
+
+    public void OnDrawGizmos()
+    {
+        if(WaypointToToggle)
+        {
+            Gizmos.color = Color.blue;
+            Gizmos.DrawLine(this.transform.position, WaypointToToggle.transform.position);
+        }
+
+    }
 }

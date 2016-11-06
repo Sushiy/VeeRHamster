@@ -20,7 +20,7 @@ public class InteractionLever : InteractionGrabbable
         float min = m_hingeJThis.limits.min;
         float max = m_hingeJThis.limits.max;
 
-        m_fCurrentValue = (m_hingeJThis.angle - min)/(max - min);
+        m_fCurrentValue = 1.0f - ((m_hingeJThis.angle - min)/(max - min));
 				ExecuteDecorators(m_fCurrentValue);
 
         if (m_textDebug != null)

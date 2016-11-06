@@ -10,7 +10,7 @@ public class InteractionMultigateDecorator : MonoBehaviour, IInteractionDecorato
 
     public HWaypoint WaypointToChange;
     public int Index = 0;
-    public List<HWaypoint> NextConnectors; 
+    public List<HWaypoint> NextConnectors = new List<HWaypoint>(); 
 
     public void Start()
     {
@@ -25,11 +25,31 @@ public class InteractionMultigateDecorator : MonoBehaviour, IInteractionDecorato
     {
         if(alpha >= MAX_VALUE)
         {
-            var old = WaypointToChange.NextWaypoint;
-            Index = (Index + 1) % NextConnectors.Count;
-            WaypointToChange.NextWaypoint = NextConnectors[Index];
-            NextConnectors[Index].PreviousWaypoint = WaypointToChange;
-            // WaypointToChange.ChangeNextWaypointRipple(old, WaypointToChange.NextWaypoint);
+            if(WaypointToChange.Connected)
+            {
+                var old = WaypointToChange.NextWaypoint;
+                Index = (Index + 1) % NextConnectors.Count;
+                WaypointToChange.NextWaypoint = NextConnectors[Index];
+                NextConnectors[Index].PreviousWaypoint = WaypointToChange;
+                // WaypointToChange.ChangeNextWaypointRipple(old, WaypointToChange.NextWaypoint);
+            }
         }
+    }
+
+    public void OnDrawGizmos()
+    {
+        if (WaypointToChange)
+        {
+            Gizmos.color = Color.blue;
+            Gizmos.DrawLine(this.transform.position, WaypointToChange.transform.position);
+
+            Gizmos.color = Color.cyan;
+            NextConnectors.ForEach(wp =>
+            {
+                if(wp)
+                    Gizmos.DrawLine(WaypointToChange.transform.position, wp.transform.position);
+            });
+        }
+
     }
 }

@@ -1,15 +1,22 @@
 fileFormatVersion: 2
-guid: 35f148db4599cba4aa1aadc8103b4526
-timeCreated: 1478378819
+guid: 8b578931bccbe824c822db88bdc9bd29
+timeCreated: 1478386902
 licenseType: Free
 ModelImporter:
   serializedVersion: 19
   fileIDToRecycleName:
     100000: //RootNode
+    100002: Diode
+    100004: Ring
     400000: //RootNode
-    2300000: //RootNode
-    3300000: //RootNode
-    4300000: Torus003
+    400002: Diode
+    400004: Ring
+    2300000: Diode
+    2300002: Ring
+    3300000: Diode
+    3300002: Ring
+    4300000: Ring
+    4300002: Diode
   materials:
     importMaterials: 1
     materialName: 0
