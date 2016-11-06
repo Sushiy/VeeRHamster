@@ -70,8 +70,8 @@ public class HWaypoint : MonoBehaviour {
 		{
 			old.PreviousWaypoint = null;
 
-			if (old.NextWaypoint != null)
-				old.NextWaypoint.ChangePrevWaypointRipple(old.NextWaypoint, null);
+            if (old.NextWaypoint != null) ;
+				//old.NextWaypoint.ChangePrevWaypointRipple(old.NextWaypoint, null);
 
 		}
 
@@ -80,7 +80,7 @@ public class HWaypoint : MonoBehaviour {
 			_new.PreviousWaypoint = this;
 			this.Connected = true;
 
-			_new.ChangeNextWaypointRipple(null, _new.NextWaypoint);
+			//_new.ChangeNextWaypointRipple(null, _new.NextWaypoint);
 		}
 		else
 		{

@@ -19,6 +19,7 @@ public class InteractionFaderDecorator : MonoBehaviour, IInteractionDecorator {
     public void OnValueChange(float alpha)
     {
         RangesPerWaypoint.ForEach(ftw => {
+            if(ftw.WaypointToToggle)
                 ftw.WaypointToToggle.Connected = (ftw.lowerBorder >= alpha && alpha < ftw.upperBorder);
         });
     }
