@@ -16,14 +16,6 @@ public class Hamster : MonoBehaviour {
 
 	public float lineProgress = 0f;
 
-	public Vector3 Direction
-	{
-		get
-		{
-			return CurrentDir == MovementDir.Forward ? TargetWaypoint.transform.position - CurrentWaypoint.transform.position : CurrentWaypoint.transform.position - TargetWaypoint.transform.position;
-		}
-	}
-
 	public HWaypoint SelectNext
 	{
 		get { return CurrentDir == MovementDir.Forward ? CurrentWaypoint.NextWaypoint : CurrentWaypoint.PreviousWaypoint;  }
@@ -45,6 +37,8 @@ public class Hamster : MonoBehaviour {
 		if (!TargetWaypoint) return;
 
 		Vector3 Direction = (TargetWaypoint.transform.position - CurrentWaypoint.transform.position).normalized;
+
+		this.transform.forward = Direction;
 
 		float maxMag = (this.TargetWaypoint.transform.position - (this.CurrentWaypoint.transform.position)).magnitude;
 
