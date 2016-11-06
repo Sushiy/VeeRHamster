@@ -46,7 +46,7 @@ public class Hamster : MonoBehaviour {
 
 		Vector3 Direction = (TargetWaypoint.transform.position - CurrentWaypoint.transform.position).normalized;
 
-		float maxMag = (this.TargetWaypoint.transform.position - this.CurrentWaypoint.transform.position).magnitude;
+		float maxMag = (this.TargetWaypoint.transform.position - (this.CurrentWaypoint.transform.position)).magnitude;
 
 		lineProgress = lineProgress + (1.0f / (1.0f + CurrentWaypoint.Drag)) * MovementSpeed * Time.deltaTime;
 

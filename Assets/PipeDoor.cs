@@ -13,7 +13,7 @@ public class PipeDoor : MonoBehaviour
         m_meshRThis = GetComponent<MeshRenderer>();
         m_hwayParent.p_Connected.Subscribe(State =>
         {
-            m_meshRThis.material.color = State ? Color.green : Color.red;
+            m_meshRThis.material.color = State && m_hwayParent.NextWaypoint != null ? Color.green : Color.red;
         })
         .AddTo(this.gameObject);
     }
