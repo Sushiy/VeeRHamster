@@ -3,6 +3,7 @@ using System.Collections;
 using System;
 using System.Collections.Generic;
 
+
 public class InteractionMultigateDecorator : MonoBehaviour, IInteractionDecorator {
 
     public float MAX_VALUE = 1f;
@@ -28,6 +29,7 @@ public class InteractionMultigateDecorator : MonoBehaviour, IInteractionDecorato
             if(WaypointToChange && WaypointToChange.Connected)
             {
                 var old = WaypointToChange.NextWaypoint;
+                old.PreviousWaypoint = null;
                 Index = (Index + 1) % NextConnectors.Count;
                 if(NextConnectors[Index] != null)
                 {

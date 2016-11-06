@@ -29,5 +29,7 @@ public class InteractionWheel : InteractionGrabbable
 
         if (m_textDebug != null)
             m_textDebug.text = m_fValue.ToString("F0");
+
+        ExecuteDecorators(m_fValue);
 	}
 }

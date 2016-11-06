@@ -12,7 +12,7 @@ public class Hamster : MonoBehaviour {
 
 	public float MovementSpeed = 0.5f /* meter per second */;
 	public HWaypoint CurrentWaypoint;
-	private HWaypoint TargetWaypoint;
+	public HWaypoint TargetWaypoint;
 
 	public float lineProgress = 0f;
 
@@ -48,8 +48,6 @@ public class Hamster : MonoBehaviour {
 
 		if(lineProgress >= maxMag)
 		{
-			this.TargetWaypoint.Decorators.ForEach(dec => dec.OnWaypointReached(this));
-
 			this.CurrentWaypoint = this.TargetWaypoint;
 			if( ((CurrentDir == MovementDir.Forward) &&  !TargetWaypoint.Connected) || SelectNext == null || ( CurrentDir == MovementDir.Backward && !SelectNext.Connected ))
 			{
@@ -58,6 +56,9 @@ public class Hamster : MonoBehaviour {
 			this.TargetWaypoint = SelectNext;
 			lineProgress = lineProgress - maxMag;
 			this.transform.position = CurrentWaypoint.transform.position + lineProgress * Direction;
+
+            if (TargetWaypoint)
+                this.TargetWaypoint.Decorators.ForEach(dec => dec.OnWaypointReached(this));
 		}
 		
 	}

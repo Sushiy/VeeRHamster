@@ -21,7 +21,7 @@ public class InteractionLever : InteractionGrabbable
         float max = m_hingeJThis.limits.max;
 
         m_fCurrentValue = 1.0f - ((m_hingeJThis.angle - min)/(max - min));
-				ExecuteDecorators(m_fCurrentValue);
+		ExecuteDecorators(m_fCurrentValue);
 
         if (m_textDebug != null)
             m_textDebug.text = m_fCurrentValue.ToString("F2");
