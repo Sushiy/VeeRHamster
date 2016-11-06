@@ -36,6 +36,23 @@ public class HWaypoint : MonoBehaviour {
 			{
 				Gizmos.color = Color.yellow;
 				Gizmos.DrawLine(this.transform.position, NextWaypoint.transform.position);
+
+				var from = (this.transform.position + (NextWaypoint.transform.position - this.transform.position) * 0.3f);
+				Vector3[] arrows = new Vector3[]
+				{
+					(this.transform.position + (NextWaypoint.transform.position - this.transform.position) * 0.15f + transform.right * 0.15f)
+					, (this.transform.position + (NextWaypoint.transform.position - this.transform.position) * 0.15f - transform.right * 0.15f)
+					, (this.transform.position + (NextWaypoint.transform.position - this.transform.position) * 0.15f + transform.forward * 0.15f)
+					, (this.transform.position + (NextWaypoint.transform.position - this.transform.position) * 0.15f - transform.forward * 0.15f)
+					, (this.transform.position + (NextWaypoint.transform.position - this.transform.position) * 0.15f + transform.up * 0.15f)
+					, (this.transform.position + (NextWaypoint.transform.position - this.transform.position) * 0.15f - transform.up * 0.15f)
+				};
+
+				foreach(var arrow in arrows)
+				{
+					Gizmos.DrawLine(from, arrow);
+				}
+
 			}
 			else
 			{
