@@ -3,12 +3,14 @@ using System.Collections;
 
 public class InteractionButton : Interactable
 {
-    bool m_bActive = false;
+    public Transform m_transButtonMesh;
     public bool m_bIsBeingPressed = false;
     private Vector3 m_v3Origin = Vector3.zero;
-    public Vector3 m_v3PressAxis = Vector3.forward;
+    public Vector3 m_v3TargetEuler= new Vector3(0,0,15.0f);
     public float m_fPressDistance = 0.05f;
     public float m_fSpeed = 2f;
+
+    public AnimationCurve m_ButtonCurve;
 
     private Vector3 m_v3Target;
 
@@ -20,7 +22,6 @@ public class InteractionButton : Interactable
 
     public override void Press(InteractionHand _hand)
     {
-        m_v3Target = m_v3Origin + m_v3PressAxis* m_fPressDistance;
         if(!m_bIsBeingPressed)
             StartCoroutine(LerpPress());
     }
@@ -34,31 +35,23 @@ public class InteractionButton : Interactable
     {
         m_bIsBeingPressed = true;
         float Alpha = 0f;
-        Vector3 startP = m_v3Origin;
+        Quaternion startQ = m_transButtonMesh.localRotation;
         while (Alpha < 1f)
         {
-            transform.position = Vector3.Lerp(startP, m_v3Target, Alpha);
+            m_transButtonMesh.localRotation = Quaternion.Slerp(startQ, startQ * Quaternion.Euler(m_v3TargetEuler), m_ButtonCurve.Evaluate(Alpha));
             yield return null;
             Alpha += Time.deltaTime * m_fSpeed;
         }
-        m_bActive = true;
 		ExecuteDecorators(1f);
         yield return new WaitForSeconds(0.1f);
-		ExecuteDecorators(0f);
-				m_bActive = false;
-        startP = m_v3Target;
-        Alpha = 0f;
-        while (Alpha < 1f)
+        ExecuteDecorators(0f);
+        while (Alpha < 2f)
         {
-            transform.position = Vector3.Lerp(startP, m_v3Origin, Alpha);
+            m_transButtonMesh.localRotation = Quaternion.Slerp(startQ, startQ * Quaternion.Euler(m_v3TargetEuler), m_ButtonCurve.Evaluate(Alpha));
             yield return null;
             Alpha += Time.deltaTime * m_fSpeed;
         }
         m_bIsBeingPressed = false;
-    }
-
-    public bool GetValue()
-    {
-        return m_bActive;
+        m_transButtonMesh.localRotation = startQ;
     }
 }

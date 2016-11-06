@@ -25,12 +25,19 @@ public class InteractionMultigateDecorator : MonoBehaviour, IInteractionDecorato
     {
         if(alpha >= MAX_VALUE)
         {
-            if(WaypointToChange.Connected)
+            if(WaypointToChange && WaypointToChange.Connected)
             {
                 var old = WaypointToChange.NextWaypoint;
                 Index = (Index + 1) % NextConnectors.Count;
-                WaypointToChange.NextWaypoint = NextConnectors[Index];
-                NextConnectors[Index].PreviousWaypoint = WaypointToChange;
+                if(NextConnectors[Index] != null)
+                {
+                    WaypointToChange.NextWaypoint = NextConnectors[Index];
+                    NextConnectors[Index].PreviousWaypoint = WaypointToChange;
+                }
+                else
+                {
+                    WaypointToChange.NextWaypoint = null;
+                }
                 // WaypointToChange.ChangeNextWaypointRipple(old, WaypointToChange.NextWaypoint);
             }
         }

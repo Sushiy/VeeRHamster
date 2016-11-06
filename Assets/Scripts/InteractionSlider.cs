@@ -27,10 +27,10 @@ public class InteractionSlider : InteractionGrabbable
     void Update()
     {
         float fDist = Vector3.Distance(m_v3Origin, m_rigidThis.position);
-        m_fCurrentValue = fDist;
+        m_fCurrentValue = fDist/m_fMaxPull;
 		ExecuteDecorators(m_fCurrentValue);
 
-        m_textDebug.text = fDist.ToString("F2");
+        m_textDebug.text = fDist.ToString("F1");
     }
 	
 	// Update is called once per frame
