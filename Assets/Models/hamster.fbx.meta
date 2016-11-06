@@ -55,6 +55,7 @@ ModelImporter:
     7400004: Armature|Walk_Action
     7400006: Hamster|HamsterAction
     7400008: Hamster|Walk_Action
+    7400010: Hamster|ArmatureAction
     9500000: //RootNode
     13700000: Hamster
   materials:
