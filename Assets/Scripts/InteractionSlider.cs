@@ -30,7 +30,7 @@ public class InteractionSlider : InteractionGrabbable
         m_fCurrentValue = fDist/m_fMaxPull;
 		ExecuteDecorators(m_fCurrentValue);
 
-        m_textDebug.text = fDist.ToString("F1");
+        m_textDebug.text = m_fCurrentValue.ToString("F1");
     }
 	
 	// Update is called once per frame
